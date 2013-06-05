@@ -25,3 +25,8 @@ def convert(amount, from_, to):
     amount = amount * (to_currency.factor / from_currency.factor)  
     
     return amount.quantize(Decimal("0.01"), rounding=ROUND_UP)
+
+
+def convert_to_default(amount, from_):
+    default = Currency.objects.get(is_default=True)
+    return convert(amount, from_, default)
